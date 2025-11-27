@@ -163,17 +163,39 @@ function onYouTubeIframeAPIReady() {
     player = new YT.Player('youtube-player', {
         height: '0',
         width: '0',
-        videoId: 'prpcyShbLBU', // Video ID from URL
+        videoId: 'prpcyShbLBU',
         playerVars: {
             'autoplay': 1,
             'controls': 0,
             'loop': 1,
-            'playlist': 'prpcyShbLBU' // Required for loop
+            'playlist': 'prpcyShbLBU',
+            'mute': 0
         },
         events: {
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
         }
     });
+}
+
+function onPlayerStateChange(event) {
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    
+    if (!musicToggle || !musicIcon) return;
+    
+    // Update UI based on player state
+    if (event.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        musicToggle.classList.add('playing');
+        musicIcon.classList.remove('fa-volume-xmark');
+        musicIcon.classList.add('fa-volume-high');
+    } else if (event.data === YT.PlayerState.PAUSED) {
+        isPlaying = false;
+        musicToggle.classList.remove('playing');
+        musicIcon.classList.remove('fa-volume-high');
+        musicIcon.classList.add('fa-volume-xmark');
+    }
 }
 
 function onPlayerReady(event) {
@@ -182,33 +204,22 @@ function onPlayerReady(event) {
     
     if (!musicToggle || !musicIcon) return;
 
-    // Don't autoplay - let user click to start (browser policy friendly)
+    // Force play immediately
+    event.target.playVideo();
     
-    // Check if actually playing
-    setTimeout(() => {
-        if (player && player.getPlayerState && player.getPlayerState() === 1) {
-            isPlaying = true;
-            musicToggle.classList.add('playing');
-            musicIcon.classList.remove('fa-volume-xmark');
-            musicIcon.classList.add('fa-volume-high');
-        }
-    }, 1000);
+    // Update UI
+    isPlaying = true;
+    musicToggle.classList.add('playing');
+    musicIcon.classList.remove('fa-volume-xmark');
+    musicIcon.classList.add('fa-volume-high');
 
     musicToggle.addEventListener('click', () => {
         if (!player) return;
         
         if (isPlaying) {
             player.pauseVideo();
-            musicToggle.classList.remove('playing');
-            musicIcon.classList.remove('fa-volume-high');
-            musicIcon.classList.add('fa-volume-xmark');
-            isPlaying = false;
         } else {
             player.playVideo();
-            musicToggle.classList.add('playing');
-            musicIcon.classList.remove('fa-volume-xmark');
-            musicIcon.classList.add('fa-volume-high');
-            isPlaying = true;
         }
     });
 }
