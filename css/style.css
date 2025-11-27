@@ -228,6 +228,7 @@ h1, h2, h3, h4 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
+    perspective: 1000px;
 }
 
 .member-card {
@@ -236,11 +237,14 @@ h1, h2, h3, h4 {
     overflow: hidden;
     border: 1px solid #333;
     transition: all 0.3s;
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
 }
 
 .member-card:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 20px rgba(255, 77, 77, 0.3);
+    /* transform handled by vanilla-tilt */
+    box-shadow: 0 0 30px rgba(255, 77, 77, 0.4);
+    z-index: 10;
 }
 
 .member-card.leader {
@@ -252,6 +256,7 @@ h1, h2, h3, h4 {
     padding: 2rem;
     position: relative;
     z-index: 2;
+    transform: translateZ(20px); /* Pop out text */
 }
 
 .role-badge {

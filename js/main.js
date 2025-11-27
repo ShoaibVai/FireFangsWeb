@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Register GSAP Plugin
+    gsap.registerPlugin(ScrollTrigger);
+
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    const links = document.querySelectorAll('.nav-links li');
 
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('nav-active');
@@ -16,10 +18,88 @@ document.addEventListener('DOMContentLoaded', () => {
             navLinks.classList.remove('nav-active');
             hamburger.classList.remove('toggle');
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
+    });
+
+    // Initialize Vanilla Tilt on Cards
+    VanillaTilt.init(document.querySelectorAll(".member-card, .about-card"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+        scale: 1.05
+    });
+
+    // --- GSAP Animations ---
+
+    // Hero Section Animation
+    const heroTl = gsap.timeline();
+    heroTl.from('.navbar', { y: -100, opacity: 0, duration: 1, ease: 'power3.out' })
+          .from('.title-wrapper', { scale: 0.5, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.5')
+          .from('.tagline', { y: 20, opacity: 0, duration: 0.8 }, '-=0.3')
+          .from('.cta-buttons .btn', { y: 20, opacity: 0, stagger: 0.2, duration: 0.8 }, '-=0.5');
+
+    // About Section Animation
+    gsap.from('.about-section .section-title', {
+        scrollTrigger: {
+            trigger: '.about-section',
+            start: 'top 80%',
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1
+    });
+
+    gsap.from('.about-card', {
+        scrollTrigger: {
+            trigger: '.about-grid',
+            start: 'top 80%',
+        },
+        y: 100,
+        opacity: 0,
+        stagger: 0.2,
+        duration: 0.8,
+        ease: 'power2.out'
+    });
+
+    // Roster Section Animation
+    gsap.from('.roster-section .section-title', {
+        scrollTrigger: {
+            trigger: '.roster-section',
+            start: 'top 80%',
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1
+    });
+
+    gsap.from('.member-card', {
+        scrollTrigger: {
+            trigger: '.roster-grid',
+            start: 'top 75%',
+        },
+        y: 100,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: 'power2.out'
+    });
+
+    // Contact Section Animation
+    gsap.from('.contact-section', {
+        scrollTrigger: {
+            trigger: '.contact-section',
+            start: 'top 85%',
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 1
     });
 
     // Fire Embers Effect
