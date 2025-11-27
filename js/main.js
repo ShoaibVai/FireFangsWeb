@@ -43,7 +43,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- GSAP Animations ---
-    if (typeof gsap === 'undefined') return;
+    if (typeof gsap === 'undefined') {
+        // If GSAP not loaded, ensure all elements are visible
+        document.querySelectorAll('.member-card, .about-card, .section-title, .contact-section').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        });
+        return;
+    }
+
+    // Ensure elements are visible by default (in case ScrollTrigger fails)
+    gsap.set('.member-card, .about-card, .roster-section .section-title, .about-section .section-title, .contact-section', {
+        opacity: 1,
+        y: 0,
+        scale: 1
+    });
 
     // Hero Section Animation
     const heroTl = gsap.timeline();
@@ -53,61 +67,76 @@ document.addEventListener('DOMContentLoaded', () => {
           .from('.cta-buttons .btn', { y: 20, opacity: 0, stagger: 0.2, duration: 0.8 }, '-=0.5');
 
     // About Section Animation
-    gsap.from('.about-section .section-title', {
-        scrollTrigger: {
-            trigger: '.about-section',
-            start: 'top 80%',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1
-    });
+    gsap.fromTo('.about-section .section-title', 
+        { y: 50, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.about-section',
+                start: 'top 80%',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1
+        }
+    );
 
-    gsap.from('.about-card', {
-        scrollTrigger: {
-            trigger: '.about-grid',
-            start: 'top 80%',
-        },
-        y: 100,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        ease: 'power2.out'
-    });
+    gsap.fromTo('.about-card', 
+        { y: 100, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.about-grid',
+                start: 'top 80%',
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: 'power2.out'
+        }
+    );
 
     // Roster Section Animation
-    gsap.from('.roster-section .section-title', {
-        scrollTrigger: {
-            trigger: '.roster-section',
-            start: 'top 80%',
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1
-    });
+    gsap.fromTo('.roster-section .section-title', 
+        { y: 50, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.roster-section',
+                start: 'top 80%',
+            },
+            y: 0,
+            opacity: 1,
+            duration: 1
+        }
+    );
 
-    gsap.from('.member-card', {
-        scrollTrigger: {
-            trigger: '.roster-grid',
-            start: 'top 75%',
-        },
-        y: 100,
-        opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: 'power2.out'
-    });
+    gsap.fromTo('.member-card', 
+        { y: 100, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.roster-grid',
+                start: 'top 85%',
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: 'power2.out'
+        }
+    );
 
     // Contact Section Animation
-    gsap.from('.contact-section', {
-        scrollTrigger: {
-            trigger: '.contact-section',
-            start: 'top 85%',
-        },
-        scale: 0.9,
-        opacity: 0,
-        duration: 1
-    });
+    gsap.fromTo('.contact-section', 
+        { scale: 0.9, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.contact-section',
+                start: 'top 85%',
+            },
+            scale: 1,
+            opacity: 1,
+            duration: 1
+        }
+    );
 
     // Fire Embers Effect
     const fireContainer = document.querySelector('.fire-particles');
