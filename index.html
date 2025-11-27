@@ -16,11 +16,17 @@
 <body>
     <div class="fire-overlay"></div>
     
+    <!-- Music Player Control -->
+    <div class="music-control" id="music-toggle" title="Toggle Theme Music">
+        <i class="fa-solid fa-volume-xmark" id="music-icon"></i>
+    </div>
+    <div id="youtube-player"></div>
+
     <nav class="navbar">
         <div class="logo">FIRE<span class="highlight">FANGS</span></div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#roster">Roster</a></li>
+            <li><a href="#roster">Members</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
@@ -32,6 +38,7 @@
     </nav>
 
     <header id="home" class="hero">
+        <div id="canvas-container"></div>
         <div class="hero-content">
             <div class="title-wrapper">
                 <h1 class="glitch" data-text="FIREFANGS">FIREFANGS</h1>
@@ -70,7 +77,7 @@
 
     <section id="roster" class="section roster-section">
         <div class="container">
-            <h2 class="section-title">THE <span class="highlight">ROSTER</span></h2>
+            <h2 class="section-title">THE <span class="highlight">MEMBERS</span></h2>
             <div class="roster-grid">
                 <!-- Leader -->
                 <div class="member-card leader">
@@ -167,7 +174,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Vanilla Tilt -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     
     <script src="js/main.js"></script>
+    <script src="js/fire-effect.js"></script>
 </body>
 </html>

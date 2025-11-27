@@ -1,15 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Register GSAP Plugin
-    gsap.registerPlugin(ScrollTrigger);
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+    }
 
     // Mobile Navigation
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('nav-active');
-        hamburger.classList.toggle('toggle');
-    });
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('nav-active');
+            hamburger.classList.toggle('toggle');
+        });
+    }
 
     // Smooth Scrolling for Anchor Links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -27,16 +31,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initialize Vanilla Tilt on Cards
-    VanillaTilt.init(document.querySelectorAll(".member-card, .about-card"), {
-        max: 15,
-        speed: 400,
-        glare: true,
-        "max-glare": 0.2,
-        scale: 1.05
-    });
+    // Initialize Vanilla Tilt on Cards (only on non-touch devices)
+    if (typeof VanillaTilt !== 'undefined' && !('ontouchstart' in window)) {
+        VanillaTilt.init(document.querySelectorAll(".member-card, .about-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.2,
+            scale: 1.05
+        });
+    }
 
     // --- GSAP Animations ---
+    if (typeof gsap === 'undefined') return;
 
     // Hero Section Animation
     const heroTl = gsap.timeline();
@@ -107,7 +114,75 @@ document.addEventListener('DOMContentLoaded', () => {
     if (fireContainer) {
         createEmbers(fireContainer);
     }
+
+    // Load YouTube API
+    loadYouTubeAPI();
 });
+
+// YouTube Player Logic
+let player;
+let isPlaying = false;
+
+function loadYouTubeAPI() {
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '0',
+        width: '0',
+        videoId: 'prpcyShbLBU', // Video ID from URL
+        playerVars: {
+            'autoplay': 1,
+            'controls': 0,
+            'loop': 1,
+            'playlist': 'prpcyShbLBU' // Required for loop
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+function onPlayerReady(event) {
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    
+    if (!musicToggle || !musicIcon) return;
+
+    // Don't autoplay - let user click to start (browser policy friendly)
+    
+    // Check if actually playing
+    setTimeout(() => {
+        if (player && player.getPlayerState && player.getPlayerState() === 1) {
+            isPlaying = true;
+            musicToggle.classList.add('playing');
+            musicIcon.classList.remove('fa-volume-xmark');
+            musicIcon.classList.add('fa-volume-high');
+        }
+    }, 1000);
+
+    musicToggle.addEventListener('click', () => {
+        if (!player) return;
+        
+        if (isPlaying) {
+            player.pauseVideo();
+            musicToggle.classList.remove('playing');
+            musicIcon.classList.remove('fa-volume-high');
+            musicIcon.classList.add('fa-volume-xmark');
+            isPlaying = false;
+        } else {
+            player.playVideo();
+            musicToggle.classList.add('playing');
+            musicIcon.classList.remove('fa-volume-xmark');
+            musicIcon.classList.add('fa-volume-high');
+            isPlaying = true;
+        }
+    });
+}
 
 function createEmbers(container) {
     const emberCount = 50;
