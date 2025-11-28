@@ -18,9 +18,16 @@
     
     <!-- Music Player Control -->
     <div class="music-control" id="music-toggle" title="Toggle Theme Music">
-        <i class="fa-solid fa-volume-xmark" id="music-icon"></i>
+        <i class="fa-solid fa-volume-high" id="music-icon"></i>
     </div>
-    <div id="youtube-player"></div>
+    
+    <!-- Background Music -->
+    <!-- NOTE: Replace with actual audio file path. YouTube URLs don't work in audio elements -->
+    <!-- Download audio from YouTube and save as theme.mp3 or use a hosted audio URL -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="theme.mp3" type="audio/mpeg">
+        <!-- Fallback: Add your audio file here -->
+    </audio>
 
     <nav class="navbar">
         <div class="logo">FIRE<span class="highlight">FANGS</span></div>

@@ -144,82 +144,66 @@ document.addEventListener('DOMContentLoaded', () => {
         createEmbers(fireContainer);
     }
 
-    // Load YouTube API
-    loadYouTubeAPI();
+    // Initialize Background Music
+    initBackgroundMusic();
 });
 
-// YouTube Player Logic
-let player;
-let isPlaying = false;
-
-function loadYouTubeAPI() {
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-}
-
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player('youtube-player', {
-        height: '0',
-        width: '0',
-        videoId: 'prpcyShbLBU',
-        playerVars: {
-            'autoplay': 1,
-            'controls': 0,
-            'loop': 1,
-            'playlist': 'prpcyShbLBU',
-            'mute': 0
-        },
-        events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+// Background Music with Auto-play
+function initBackgroundMusic() {
+    const audio = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    const musicIcon = document.getElementById('music-icon');
+    
+    if (!audio || !musicToggle || !musicIcon) return;
+    
+    let isPlaying = false;
+    
+    // Set initial volume
+    audio.volume = 0.5;
+    
+    // Function to start music
+    const startMusic = () => {
+        audio.play().then(() => {
+            isPlaying = true;
+            musicToggle.classList.add('playing');
+            musicIcon.classList.remove('fa-volume-xmark');
+            musicIcon.classList.add('fa-volume-high');
+        }).catch(err => {
+            console.log('Autoplay prevented, user interaction required');
+        });
+    };
+    
+    // Try to autoplay
+    startMusic();
+    
+    // Also try on first user interaction
+    const enableOnInteraction = () => {
+        if (!isPlaying) {
+            startMusic();
         }
-    });
-}
-
-function onPlayerStateChange(event) {
-    const musicToggle = document.getElementById('music-toggle');
-    const musicIcon = document.getElementById('music-icon');
+        document.removeEventListener('click', enableOnInteraction);
+        document.removeEventListener('scroll', enableOnInteraction);
+        document.removeEventListener('touchstart', enableOnInteraction);
+    };
     
-    if (!musicToggle || !musicIcon) return;
+    document.addEventListener('click', enableOnInteraction, { once: true });
+    document.addEventListener('scroll', enableOnInteraction, { once: true });
+    document.addEventListener('touchstart', enableOnInteraction, { once: true });
     
-    // Update UI based on player state
-    if (event.data === YT.PlayerState.PLAYING) {
-        isPlaying = true;
-        musicToggle.classList.add('playing');
-        musicIcon.classList.remove('fa-volume-xmark');
-        musicIcon.classList.add('fa-volume-high');
-    } else if (event.data === YT.PlayerState.PAUSED) {
-        isPlaying = false;
-        musicToggle.classList.remove('playing');
-        musicIcon.classList.remove('fa-volume-high');
-        musicIcon.classList.add('fa-volume-xmark');
-    }
-}
-
-function onPlayerReady(event) {
-    const musicToggle = document.getElementById('music-toggle');
-    const musicIcon = document.getElementById('music-icon');
-    
-    if (!musicToggle || !musicIcon) return;
-
-    // Force play immediately
-    event.target.playVideo();
-    
-    // Update UI
-    isPlaying = true;
-    musicToggle.classList.add('playing');
-    musicIcon.classList.remove('fa-volume-xmark');
-    musicIcon.classList.add('fa-volume-high');
-
+    // Toggle music on button click
     musicToggle.addEventListener('click', () => {
-        if (!player) return;
-        
         if (isPlaying) {
-            player.pauseVideo();
+            audio.pause();
+            isPlaying = false;
+            musicToggle.classList.remove('playing');
+            musicIcon.classList.remove('fa-volume-high');
+            musicIcon.classList.add('fa-volume-xmark');
         } else {
-            player.playVideo();
+            audio.play();
+            isPlaying = true;
+            musicToggle.classList.add('playing');
+            musicIcon.classList.remove('fa-volume-xmark');
+            musicIcon.classList.add('fa-volume-high');
         }
     });
 }
