@@ -19,8 +19,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            navLinks.classList.remove('nav-active');
-            hamburger.classList.remove('toggle');
+
+            if (navLinks && hamburger) {
+                navLinks.classList.remove('nav-active');
+                hamburger.classList.remove('toggle');
+            }
 
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -53,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Ensure elements are visible by default (in case ScrollTrigger fails)
-    gsap.set('.member-card, .about-card, .roster-section .section-title, .about-section .section-title, .contact-section', {
+    gsap.set('.member-card, .about-card, .roster-section .section-title, .about-section .section-title, .contact-section, .ignite-stats .stat-card, .timeline-item', {
         opacity: 1,
         y: 0,
         scale: 1
@@ -64,7 +67,10 @@ document.addEventListener('DOMContentLoaded', () => {
     heroTl.from('.navbar', { y: -100, opacity: 0, duration: 1, ease: 'power3.out' })
           .from('.title-wrapper', { scale: 0.5, opacity: 0, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.5')
           .from('.tagline', { y: 20, opacity: 0, duration: 0.8 }, '-=0.3')
-          .from('.cta-buttons .btn', { y: 20, opacity: 0, stagger: 0.2, duration: 0.8 }, '-=0.5');
+          .from('.hero-copy', { y: 20, opacity: 0, duration: 0.8 }, '-=0.4')
+          .from('.cta-buttons .btn', { y: 20, opacity: 0, stagger: 0.15, duration: 0.7 }, '-=0.5')
+          .from('.hero-meta div', { y: 30, opacity: 0, stagger: 0.1, duration: 0.6 }, '-=0.4')
+          .from('.command-card', { x: 60, opacity: 0, duration: 0.9, ease: 'power3.out' }, '-=0.6');
 
     // About Section Animation
     gsap.fromTo('.about-section .section-title', 
@@ -80,6 +86,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     );
 
+    gsap.fromTo('.ignite-stats .stat-card', 
+        { y: 60, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.ignite-stats',
+                start: 'top 85%',
+            },
+            y: 0,
+            opacity: 1,
+            stagger: 0.15,
+            duration: 0.7,
+            ease: 'power2.out'
+        }
+    );
+
     gsap.fromTo('.about-card', 
         { y: 100, opacity: 0 },
         {
@@ -92,6 +113,20 @@ document.addEventListener('DOMContentLoaded', () => {
             stagger: 0.2,
             duration: 0.8,
             ease: 'power2.out'
+        }
+    );
+
+    gsap.fromTo('.timeline-item', 
+        { x: -40, opacity: 0 },
+        {
+            scrollTrigger: {
+                trigger: '.timeline',
+                start: 'top 80%',
+            },
+            x: 0,
+            opacity: 1,
+            stagger: 0.2,
+            duration: 0.7
         }
     );
 
@@ -125,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // Contact Section Animation
-    gsap.fromTo('.contact-section', 
+    gsap.fromTo('.contact-section .contact-panel', 
         { scale: 0.9, opacity: 0 },
         {
             scrollTrigger: {
