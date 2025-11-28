@@ -8,10 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
 
+    const body = document.body;
+
     if (hamburger && navLinks) {
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('nav-active');
             hamburger.classList.toggle('toggle');
+            body.classList.toggle('nav-open');
         });
     }
 
@@ -23,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navLinks && hamburger) {
                 navLinks.classList.remove('nav-active');
                 hamburger.classList.remove('toggle');
+                body.classList.remove('nav-open');
             }
 
             const target = document.querySelector(this.getAttribute('href'));
