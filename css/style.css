@@ -660,13 +660,23 @@ h1, h2, h3, h4 {
     @media (max-width: 920px) {
         .nav-links {
             position: fixed;
-            inset: 0 auto 0 30%;
+            inset: 0;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(5, 2, 8, 0.95);
+            gap: 1.5rem;
+            background: rgba(4, 2, 8, 0.98);
             transform: translateX(100%);
             transition: transform 0.4s ease;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            font-size: 1.2rem;
+            letter-spacing: 0.4em;
         }
 
         .nav-links.nav-active {
@@ -679,6 +689,68 @@ h1, h2, h3, h4 {
         }
     }
 
+    @media (max-width: 768px) {
+        .section {
+            padding: 4rem 1.5rem;
+        }
+
+        .hero {
+            padding: 4.5rem 1.5rem 3rem;
+        }
+
+        .hero-grid {
+            gap: 2.5rem;
+        }
+
+        .title-wrapper h1 {
+            font-size: clamp(2.8rem, 12vw, 4rem);
+        }
+
+        .hero-left .tagline {
+            font-size: 1rem;
+            letter-spacing: 0.35em;
+        }
+
+        .cta-buttons {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .command-card {
+            padding: 1.75rem;
+            border-radius: 22px;
+        }
+
+        .hero-stats {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        }
+
+        .ignite-stats {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .about-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .roster-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .timeline {
+            border: none;
+            padding-left: 0;
+        }
+
+        .contact-panel {
+            padding: 1.75rem;
+        }
+    }
+
     @media (max-width: 640px) {
         .hero-meta {
             grid-template-columns: 1fr;
@@ -688,8 +760,47 @@ h1, h2, h3, h4 {
             grid-template-columns: 1fr;
         }
 
-        .timeline {
-            border: none;
-            padding-left: 0;
+        .roster-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 520px) {
+        .section {
+            padding: 3.5rem 1.25rem;
+        }
+
+        .hero {
+            padding: 4rem 1.25rem 2.5rem;
+        }
+
+        .hero-left .tagline {
+            letter-spacing: 0.2em;
+        }
+
+        .hero-copy {
+            font-size: 0.95rem;
+        }
+
+        .hero-stats {
+            grid-template-columns: 1fr;
+        }
+
+        .command-card {
+            padding: 1.5rem;
+        }
+
+        .stat-card,
+        .about-card,
+        .member-card,
+        .contact-panel {
+            padding: 1.5rem;
+        }
+
+        .music-control {
+            right: 16px;
+            bottom: 16px;
+            width: 48px;
+            height: 48px;
         }
     }
