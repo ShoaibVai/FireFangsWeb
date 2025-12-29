@@ -1,319 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="FireFangs Esports Team - The most intimidating and fiery esports team. Meet the roster: Warlord, Hitman, Flamer.">
-    <meta name="keywords" content="FireFangs, Esports, Free Fire, Gaming, Warlord, Flamer, Hitman">
-    <meta name="author" content="FireFangs">
-    <title>FIREFANGS | Ignite the Battlefield</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Teko:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TargetLocked – elite esports squad portfolio with cyber-military energy." />
+  <title>TargetLocked | Esports Unit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" defer></script>
 </head>
 <body>
-    <div class="fire-overlay"></div>
-    
-    <!-- Music Player Control -->
-    <div class="music-control" id="music-toggle" title="Toggle Theme Music">
-        <i class="fa-solid fa-volume-high" id="music-icon"></i>
+  <div class="scanlines"></div>
+  <header class="top-bar">
+    <div class="logo-block">
+      <div class="crosshair"></div>
+      <div class="logo-text">TargetLocked</div>
+      <span class="tag">Cyber Unit</span>
     </div>
-    
-    <!-- Background Music -->
-    <audio id="bg-music" loop preload="auto">
-        <source src="assets/bg-music.m4a" type="audio/x-m4a">
-    </audio>
+    <div class="controls">
+      <button id="music-toggle" class="ghost-btn" aria-label="Toggle background music">🔊 Engage Audio</button>
+    </div>
+  </header>
 
-    <nav class="navbar">
-        <div class="logo">FIRE<span class="highlight">FANGS</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#roster">Members</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="hamburger">
-            <div class="line"></div>
-            <div class="line"></div>
-            <div class="line"></div>
+  <main>
+    <section class="hero" id="hero" data-animate>
+      <div class="hero-overlay"></div>
+      <div class="hero-grid"></div>
+      <div class="hero-content">
+        <div class="hero-left">
+          <p class="eyebrow">Mission Briefing // TL-OPS</p>
+          <h1 class="glitch" data-text="TargetLocked">TargetLocked</h1>
+          <p class="subtitle">WE DON’T MISS — WE ERASE.</p>
+          <div class="hero-actions">
+            <a class="cta" href="#roster">Open Roster Grid</a>
+            <a class="cta ghost" href="#history">Mission Log</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="label">Established</span>
+              <span class="value">2022 → Reforged 2025</span>
+            </div>
+            <div class="stat">
+              <span class="label">Doctrine</span>
+              <span class="value">Zone Push / Surgical Entries</span>
+            </div>
+          </div>
         </div>
-    </nav>
+        <div class="hero-right">
+          <div class="hero-logo-wrap">
+            <div class="reticle"></div>
+            <img src="./assets/logo.jpeg" alt="TargetLocked logo" class="hero-logo" loading="lazy" />
+          </div>
+          <div class="hero-badge">
+            <p>Elite cyber-military aesthetic calibrated for mobile & desktop. Tap. Aim. Erase.</p>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint">Scroll to deploy ▾</div>
+    </section>
 
-    <main>
-        <section id="home" class="hero">
-            <div id="canvas-container"></div>
-            <div class="hero-grid">
-                <div class="hero-left">
-                    <p class="mini-label">BORN IN FIRE · BUILT FOR GLORY</p>
-                    <div class="title-wrapper">
-                        <h1 class="glitch" data-text="FIREFANGS">FIREFANGS</h1>
-                    </div>
-                    <p class="tagline">DOMINATION BEGINS WITH BELIEF</p>
-                    <p class="hero-copy">FireFangs is a strike unit forged by Parvej "FFG×WARLORD" to scorch every arena with calculated aggression, relentless pressure, and precise execution.</p>
-                    <div class="cta-buttons">
-                        <a href="#roster" class="btn btn-primary">MEET THE SQUAD</a>
-                        <a href="https://youtu.be/prpcyShbLBU?si=suPvnAiBUgMNL_-L" target="_blank" class="btn btn-secondary"><i class="fa-solid fa-play"></i> THEME ANTHEM</a>
-                    </div>
-                    <div class="hero-meta">
-                        <div>
-                            <span class="meta-label">Founded</span>
-                            <span class="meta-value">20 · 10 · 2023</span>
-                        </div>
-                        <div>
-                            <span class="meta-label">Leader</span>
-                            <span class="meta-value">Parvej (FFG×WARLORD)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-right">
-                    <div class="command-card">
-                        <p class="command-label">CURRENT STATUS</p>
-                        <h3 class="command-title">NEED PRIMARY RUSHER</h3>
-                        <ul class="command-list">
-                            <li>
-                                <span>Discipline</span>
-                                <strong>Support / Rush / Snipe</strong>
-                            </li>
-                            <li>
-                                <span>Active Roster</span>
-                                <strong>6 Elite Operatives</strong>
-                            </li>
-                            <li>
-                                <span>Specialty</span>
-                                <strong>Firefield Control</strong>
-                            </li>
-                        </ul>
-                        <div class="pulse-line"></div>
-                        <div class="hero-stats">
-                            <div>
-                                <span>Coach</span>
-                                <strong>Abdullah "HITMAN"</strong>
-                            </div>
-                            <div>
-                                <span>Support Core</span>
-                                <strong>Siam · Flamer</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-marquee">
-                    <div class="marquee-track">
-                        <span>FIRE IN OUR DNA · </span>
-                        <span>TACTICS OVER CHAOS · </span>
-                        <span>WARLORD LEADS THE FLAME · </span>
-                        <span>HITMAN STACKS THE STRATS · </span>
-                        <span>RUSHERS PUSH THE FRONT · </span>
-                        <span>FLAMER OWNS THE SKYLINE · </span>
-                    </div>
-            </div>
-            <div class="fire-particles"></div>
-        </section>
+    <section class="history" id="history" data-animate>
+      <div class="section-title">
+        <span class="accent-bar"></span>
+        <h2>Mission Log</h2>
+        <p>How TargetLocked sharpened the blade.</p>
+      </div>
+      <div class="history-grid">
+        <div class="history-block">
+          <h3>Genesis // Feb 2022</h3>
+          <p>Four players formed a small squad with one clear purpose — zone pushing. A leader watched a YouTube video and the spark ignited: build a real team, not just play matches.</p>
+        </div>
+        <div class="history-block">
+          <h3>Grind Phase</h3>
+          <p>The tournament grind began. The road was long and brutal. Mahadi Rahman (NL INFINITY), Nafi (HITMAN), and Nirob (ADVANCE) became pillars of relentless training and discipline.</p>
+        </div>
+        <div class="history-block">
+          <h3>Shutdown & Return</h3>
+          <p>In 2023 the unit went dark. After a long break, June 2025 marked the reboot — stronger, wiser, and more dangerous.</p>
+        </div>
+        <div class="history-block">
+          <h3>Today</h3>
+          <p>Daily practice. Daily mistakes. Daily lessons. Losses and trolls came, but the line never broke. Skill wins matches, team spirit makes champions. Now they are not just a team — they are a fear, an identity, a family.</p>
+        </div>
+      </div>
+    </section>
 
-        <section class="ignite-stats">
-            <div class="stat-card">
-                <p class="stat-label">FOUNDER</p>
-                <h3>Parvej Khan</h3>
-                <p class="stat-sub">FFG×WARLORD</p>
-            </div>
-            <div class="stat-card">
-                <p class="stat-label">TEAM GMAIL</p>
-                <h3>firefangsffg@gmail.com</h3>
-                <p class="stat-sub">Primary contact</p>
-            </div>
-            <div class="stat-card">
-                <p class="stat-label">FAVOURITE LOADOUT</p>
-                <h3>Trogon · M590 · AWM-Y</h3>
-                <p class="stat-sub">Chosen by Warlord · Flamer</p>
-            </div>
-        </section>
+    <section class="roster" id="roster" data-animate>
+      <div class="section-title">
+        <span class="accent-bar"></span>
+        <h2>Roster Grid // Tactical Dossiers</h2>
+        <p>Precision-built HUD cards for the active strike unit.</p>
+      </div>
+      <div class="roster-shell">
+        <div class="roster-grid" aria-live="polite"></div>
+      </div>
+    </section>
 
-        <section id="about" class="section about-section">
-            <div class="container">
-                <div class="section-header">
-                    <p class="mini-label">ORIGIN STORY</p>
-                    <h2 class="section-title">ORIGIN <span class="highlight">STORY</span></h2>
-                    <p class="section-copy">FireFangs ignited on 20-10-2023 under the vision of Parvej "FFG×WARLORD" Khan. It began as a tactical strike team obsessed with synergy, role discipline, and calculated aggression.</p>
-                </div>
-                <div class="about-grid">
-                    <div class="about-card">
-                        <i class="fa-solid fa-fire-flame-curved icon"></i>
-                        <h3>ESTABLISHED</h3>
-                        <p>20-10-2023</p>
-                    </div>
-                    <div class="about-card">
-                        <i class="fa-solid fa-crown icon"></i>
-                        <h3>FOUNDER</h3>
-                        <p>Parvej (FFG×WARLORD)</p>
-                    </div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <span class="timeline-date">20 OCT 2023</span>
-                        <div>
-                            <h4>Founding Spark</h4>
-                            <p>Parvej "FFG×WARLORD" Khan establishes FireFangs and signs Khadimul "FFG-FLAMER" Islam as original sniper.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-item">
-                        <span class="timeline-date">03 MAY 2025</span>
-                        <div>
-                            <h4>Coaching Era</h4>
-                            <p>Abdullah Nafi "HITMAN" steps in as tactical coach, formalizing scrim prep and counter-strat playbooks.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <section class="callout" data-animate>
+      <div class="callout-content">
+        <div>
+          <h3>“Skill wins matches, but team spirit creates champions.”</h3>
+          <p>TargetLocked is calibrated for high-stakes pushes, surgical entries, and ruthless consistency.</p>
+        </div>
+        <a class="cta" href="#hero">Return to Briefing</a>
+      </div>
+    </section>
+  </main>
 
-        <section id="roster" class="section roster-section">
-            <div class="container">
-                <div class="section-header">
-                    <p class="mini-label">ACTIVE OPERATIVES</p>
-                    <h2 class="section-title">THE <span class="highlight">MEMBERS</span></h2>
-                    <p class="section-copy">Every member carries a role-specific identity. Together they execute a full-spectrum fire assault.</p>
-                </div>
-                <div class="roster-grid">
-                    <!-- Leader -->
-                    <article class="member-card leader">
-                        <div class="ember-glow"></div>
-                        <div class="member-info">
-                            <div class="role-badge">LEADER / FOUNDER</div>
-                            <h3>Parvej Khan</h3>
-                            <h4 class="nickname">FFG×WARLORD</h4>
-                            <p class="member-role">Supporter / Rusher · Vision caller · Favourite weapon: Trogon</p>
-                            <ul class="member-meta">
-                                <li><span>Joined</span><strong>20-10-2023</strong></li>
-                                <li><span>Specialty</span><strong>Macro leadership</strong></li>
-                            </ul>
-                            <div class="socials compact">
-                                <a href="https://www.youtube.com/@Warlord_76-FF" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Coach -->
-                    <article class="member-card">
-                        <div class="ember-glow"></div>
-                        <div class="member-info">
-                            <div class="role-badge">COACH</div>
-                            <h3>Abdullah Nafi</h3>
-                            <h4 class="nickname">HITMAN</h4>
-                            <p class="member-role">Strategic coach · Contact: ss01916150701</p>
-                            <ul class="member-meta">
-                                <li><span>Joined</span><strong>03-05-2025</strong></li>
-                                <li><span>Specialty</span><strong>Counter-strat design</strong></li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Member 1 -->
-                    
-
-                    <!-- Member 2 -->
-                    <article class="member-card">
-                        <div class="ember-glow"></div>
-                        <div class="member-info">
-                            <div class="role-badge">SNIPER</div>
-                            <h3>Khadimul Islam</h3>
-                            <h4 class="nickname">FFG-FLAMER</h4>
-                            <p class="member-role">Long-range overwatch · Favourite weapon: AWM-Y</p>
-                            <ul class="member-meta">
-                                <li><span>Joined</span><strong>11-10-2023</strong></li>
-                                <li><span>Links</span><strong><a href="https://www.facebook.com/profile.php?id=61583672977492" target="_blank">Facebook</a> · <a href="https://www.youtube.com/@Flamerz76" target="_blank">YouTube</a></strong></li>
-                            </ul>
-                            <div class="socials compact">
-                                <a href="https://www.facebook.com/profile.php?id=61583672977492" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                                <a href="https://www.youtube.com/@Flamerz76" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- New Member: Niloy Ahmed -->
-                    <article class="member-card">
-                        <div class="ember-glow"></div>
-                        <div class="member-info">
-                            <div class="role-badge">PRIMARY RUSHER</div>
-                            <h3>Niloy Ahmed</h3>
-                            <h4 class="nickname">FFG-NILOY</h4>
-                            <p class="member-role">Primary Rusher · Favourite weapon: M590</p>
-                            <ul class="member-meta">
-                                <li><span>Joined</span><strong>28-11-2025</strong></li>
-                                <li><span>Role</span><strong>Primary Entry</strong></li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- New Member: Emon -->
-                    <article class="member-card">
-                        <div class="ember-glow"></div>
-                        <div class="member-info">
-                            <div class="role-badge">SECONDARY RUSHER</div>
-                            <h3>Emon</h3>
-                            <h4 class="nickname">FFG-EMON</h4>
-                            <p class="member-role">Secondary Rusher · Favourite weapon: M590</p>
-                            <ul class="member-meta">
-                                <li><span>Joined</span><strong>15-11-2025</strong></li>
-                                <li><span>Role</span><strong>Backup Entry</strong></li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- New Member: Siam -->
-                    <article class="member-card">
-                        <div class="ember-glow"></div>
-                        <div class="member-info">
-                            <div class="role-badge">SUPPORTER / NADER</div>
-                            <h3>Siam</h3>
-                            <h4 class="nickname">FFG-SIAM</h4>
-                            <p class="member-role">Supporter / Nader · Favourite weapon: M79</p>
-                            <ul class="member-meta">
-                                <li><span>Joined</span><strong>20-11-2025</strong></li>
-                                <li><span>Role</span><strong>Support Core</strong></li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="section contact-section">
-            <div class="container">
-                <div class="section-header">
-                    <p class="mini-label">ENGAGE WITH THE FIRE</p>
-                    <h2 class="section-title">JOIN THE <span class="highlight">INFERNO</span></h2>
-                    <p class="section-copy">Contact FireFangs for tournaments, scrims, or roster conversations. We answer fast, we play faster.</p>
-                </div>
-                <div class="contact-panel">
-                    <div class="contact-line">
-                        <span>Team Gmail</span>
-                        <a href="mailto:firefangsffg@gmail.com">firefangsffg@gmail.com</a>
-                    </div>
-                    <div class="contact-line">
-                        <span>Theme Anthem</span>
-                        <a href="https://youtu.be/prpcyShbLBU?si=suPvnAiBUgMNL_-L" target="_blank">Listen on YouTube</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 FIREFANGS. All Rights Reserved.</p>
-    </footer>
-
-    <!-- GSAP & ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <!-- Vanilla Tilt -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <script src="js/main.js"></script>
-    <script src="js/fire-effect.js"></script>
+  <audio id="bg-music" src="./assets/bg-music.m4a" loop preload="auto"></audio>
+  <script src="script.js" defer></script>
 </body>
 </html>
