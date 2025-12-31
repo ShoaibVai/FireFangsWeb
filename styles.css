@@ -432,7 +432,7 @@ a {
 
 .roster-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
   gap: 18px;
 }
 
@@ -632,6 +632,9 @@ a {
   .hero {
     padding: 64px 6vw 96px;
   }
+  .glitch {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+  }
   .hero-logo-wrap {
     max-width: 320px;
     justify-self: center;
@@ -639,18 +642,32 @@ a {
   .top-bar {
     padding: 12px 14px;
   }
+  .roster-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  }
 }
 
 @media (max-width: 720px) {
   .hero {
     padding: 58px 6vw 86px;
   }
+  .glitch {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+    letter-spacing: 3px;
+  }
   .section-title {
     padding: 0 6vw;
   }
-  .roster-grid,
+  .roster-shell {
+    padding: 0 6vw;
+  }
+  .roster-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
   .history-grid {
     padding: 0 6vw;
+    grid-template-columns: 1fr;
   }
   .callout {
     margin: 40px 6vw 70px;
@@ -660,6 +677,9 @@ a {
   }
   .hero-stats {
     grid-template-columns: 1fr;
+  }
+  .card {
+    max-width: 100%;
   }
   .card-header {
     grid-template-columns: 70px 1fr;
@@ -671,5 +691,8 @@ a {
   .scroll-hint {
     font-size: 0.8rem;
     bottom: 12px;
+  }
+  .hero-badge {
+    font-size: 0.9rem;
   }
 }
